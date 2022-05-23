@@ -65,6 +65,40 @@ class URLSessionWebSocket: NSObject {
     func disconnect() {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
     }
+    
+    func deCodeToModel(data: Data?) -> Any{
+        var messageType: messageType = .history
+        if let data = data {
+            let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String:AnyObject]
+            if let json = json{
+                let type = json["type"] as? String ?? ""
+                switch type{
+                case "history":
+                    messageType = .history
+                    var datasModel: [MessageDataModel] = []
+                    let datas = json["data"] as? [Dictionary<String,Any>] ?? []
+                    
+                    for i in datas {
+                        let name = i["author"] as? String ?? ""
+                        let message = i["author"] as? String ?? ""
+                        let color = i["color"] as? String ?? ""
+                        let time = i["time"] as? Int ?? 0
+                        datasModel.append(.init(author: name, text: message, color: color.converToColor(), time: time))
+                    }
+                    
+                    return MessageModel(type: messageType, data: datasModel)
+                case "message":
+                    messageType = .message
+                default:
+                    return ""
+                }
+
+            }
+
+        }
+        return ""
+        
+    }
 }
 
 extension URLSessionWebSocket: URLSessionWebSocketDelegate {

@@ -15,6 +15,7 @@
 		1A57CBD328378A0F00ED4CAF /* Pods_WebSocketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; };
 		1A57CBD428378A0F00ED4CAF /* Pods_WebSocketTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AD38D9C283B69F400CC9E0E /* ChildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD38D9B283B69F400CC9E0E /* ChildViews.swift */; };
+		36E5FD55283B7F78009822F7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5FD54283B7F78009822F7 /* MessageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		1A57CBD128377FE800ED4CAF /* URLSessionWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionWebSocket.swift; sourceTree = "<group>"; };
 		1A57CBD62837931400ED4CAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1AD38D9B283B69F400CC9E0E /* ChildViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViews.swift; sourceTree = "<group>"; };
+		36E5FD54283B7F78009822F7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		5A8EFFD62C2DFF8F6AC72F00 /* Pods-WebSocketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketTest.release.xcconfig"; path = "Target Support Files/Pods-WebSocketTest/Pods-WebSocketTest.release.xcconfig"; sourceTree = "<group>"; };
 		D233573B5EFE42C4BAC0D553 /* Pods-WebSocketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSocketTest.debug.xcconfig"; path = "Target Support Files/Pods-WebSocketTest/Pods-WebSocketTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 		1A57CBBF283742C500ED4CAF /* WebSocketTest */ = {
 			isa = PBXGroup;
 			children = (
+				36E5FD53283B7F62009822F7 /* Models */,
 				1A57CBD62837931400ED4CAF /* Info.plist */,
 				1A57CBC0283742C500ED4CAF /* WebSocketTestApp.swift */,
 				1A57CBC2283742C500ED4CAF /* ContentView.swift */,
@@ -95,6 +98,14 @@
 				1A57CBC7283742C600ED4CAF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		36E5FD53283B7F62009822F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				36E5FD54283B7F78009822F7 /* MessageModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5D08D30AB8C2E7559E048DEB /* Frameworks */ = {
@@ -229,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E5FD55283B7F78009822F7 /* MessageModel.swift in Sources */,
 				1A57CBC3283742C500ED4CAF /* ContentView.swift in Sources */,
 				1AD38D9C283B69F400CC9E0E /* ChildViews.swift in Sources */,
 				1A57CBC1283742C500ED4CAF /* WebSocketTestApp.swift in Sources */,
@@ -362,7 +374,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebSocketTest/Preview Content\"";
-				DEVELOPMENT_TEAM = 78K3R74X59;
+				DEVELOPMENT_TEAM = NZT54R9366;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebSocketTest/Info.plist;
@@ -394,7 +406,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebSocketTest/Preview Content\"";
-				DEVELOPMENT_TEAM = 78K3R74X59;
+				DEVELOPMENT_TEAM = NZT54R9366;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebSocketTest/Info.plist;
