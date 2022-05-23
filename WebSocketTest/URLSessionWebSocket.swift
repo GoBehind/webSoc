@@ -66,9 +66,13 @@ class URLSessionWebSocket: NSObject {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
     }
     
-    func deCodeToModel(data: Data?) -> Any{
+    func deCodeToModel(str: String?) -> Any{
+        guard let str = str else {
+            return ""
+        }
+
         var messageType: messageType = .history
-        if let data = data {
+        if let data = str.data(using: .utf8) {
             let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String:AnyObject]
             if let json = json{
                 let type = json["type"] as? String ?? ""
