@@ -89,6 +89,12 @@ class URLSessionWebSocket: NSObject {
                     return MessageModel(type: messageType, data: datasModel)
                 case "message":
                     messageType = .message
+                    let messageData = json["data"] as? Dictionary<String,Any> ?? [:]
+                    let name = messageData["author"] as? String ?? ""
+                    let message = messageData["author"] as? String ?? ""
+                    let color = messageData["color"] as? String ?? ""
+                    let time = messageData["time"] as? Int ?? 0
+                    return MessageModel(type: messageType, data: [.init(author: name, text: message, color: color.converToColor(), time: time)])
                 default:
                     return ""
                 }
