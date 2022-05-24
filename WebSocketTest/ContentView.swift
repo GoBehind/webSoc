@@ -11,55 +11,120 @@ struct ContentView: View {
     
     let urlSession = URLSessionWebSocket()
     @State var message = ""
+    @State var userName: String = ""
+    @State var okToGo: Bool = false
+    @State var datas = MessageModel(data: [])
+    @State var contentView = [AnyView]()
     
     var body: some View {
         NavigationView{
             VStack {
-                
-                TextView(text: $message)
-                    .onChange(of: self.message, perform: { newValue in
-                        
-                    })
-                    .padding(.horizontal)
-                
-                Button {
-                    urlSession.receviedContent = { msg in
-                        self.message += msg
+                ScrollView(.vertical, showsIndicators: true) {
+                    ForEach(self.contentView.indices, id: \.self) { i in
+                        self.contentView[i]
                     }
-                    urlSession.connect()
-//                    if let msg = urlSession.receviedContent {
-//                        msg(self.message)
-//                    }
-                } label: {
-                    Text("傑哥你幹嘛")
-                        .font(.system(.title2, design: .rounded))
-                        .foregroundColor(.yellow)
-                }.padding()
+                }.onAppear(perform: self.setupViews)
+//                TextView(text: $message)
+//                    .padding(.horizontal)
                 
-                Button {
-                    urlSession.send(message: "我看你完全是不懂喔")
-                } label: {
-                    Text("我看你完全是不懂喔")
-                        .font(.system(.title2, design: .rounded))
-                        .foregroundColor(.pink)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack{
+                        Button {
+                            urlSession.send(message: "我看你完全是不懂喔")
+                        } label: {
+                            Text("我看你完全是不懂喔")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                        }
+                        .background(Color.pink)
+                        .cornerRadius(6.0)
+                        
+                        Button {
+                            urlSession.send(message: "都幾歲了還這麼害羞")
+                        } label: {
+                            Text("都幾歲了還這麼害羞")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                        }
+                        .background(Color.gray)
+                        .cornerRadius(6.0)
+                        
+                        Button {
+                            urlSession.send(message: "那個彬彬就是遜啦！")
+                        } label: {
+                            Text("那個彬彬就是遜啦！")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                        }
+                        .background(Color.blue)
+                        .cornerRadius(6.0)
+                        
+                        Button {
+                            urlSession.send(message: "聽話！讓我看看")
+                        } label: {
+                            Text("聽話！讓我看看")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                        }
+                        .background(Color.orange)
+                        .cornerRadius(6.0)
+                    }
+                    .padding(2.5)
                 }
+                .padding(.horizontal, 5)
                 
-                Button {
-                    urlSession.disconnect()
-                } label: {
-                    Text("這個彬彬就是遜啦")
-                        .font(.system(.title2, design: .rounded))
-                        .foregroundColor(.gray)
+                HStack {
+                    TextField("使用者名稱", text: $userName)                   .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                        .disabled(self.okToGo)
+                    Button {
+                        if !self.okToGo {
+                            urlSession.receviedContent = { msg in
+                                self.datas = urlSession.deCodeToModel(str: msg) as! MessageModel
+//                                self.message += msg
+                            }
+                            urlSession.connect()
+                            urlSession.send(message: self.userName)
+                            self.okToGo = true
+                        } else {
+                            urlSession.disconnect()
+                            self.okToGo = false
+                        }
+                        
+                    } label: {
+                        Text(self.okToGo ? "離線" : "連結")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(5)
+                    }
+                    .background(Color.yellow)
+                    .cornerRadius(6.0)
                 }
-                .padding()
-            }
-
+                .padding([.bottom, .horizontal])
+                .frame(width: UIScreen.main.bounds.width)
             
+            }
             .navigationTitle("WebSocketTest")
             .navigationBarTitleDisplayMode(.large)
         }
     }
-
+    
+    func outputText(user: String, content: String) -> String {
+        return "\("text"):\(content),\("author"):\(user)"
+    }
+    
+    func setupViews() {
+        for item in self.datas.data {
+            self.contentView.append(AnyView(MsgView(name: item.author,
+                                                    content: item.text,
+                                                    dateString: String(item.time),
+                                                    textColor: item.color)))
+        }
+    }
 }
 
 

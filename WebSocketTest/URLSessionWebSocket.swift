@@ -7,6 +7,7 @@
 
 import Foundation
 import Starscream
+import SwiftUI
 
 class URLSessionWebSocket: NSObject {
     
@@ -66,7 +67,7 @@ class URLSessionWebSocket: NSObject {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
     }
     
-    func deCodeToModel(str: String?) -> Any{
+    func deCodeToModel(str: String?) -> Any {
         guard let str = str else {
             return ""
         }

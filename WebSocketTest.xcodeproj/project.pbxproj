@@ -12,20 +12,20 @@
 		1A57CBC5283742C600ED4CAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A57CBC4283742C600ED4CAF /* Assets.xcassets */; };
 		1A57CBC8283742C600ED4CAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A57CBC7283742C600ED4CAF /* Preview Assets.xcassets */; };
 		1A57CBD228377FE800ED4CAF /* URLSessionWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A57CBD128377FE800ED4CAF /* URLSessionWebSocket.swift */; };
-		1A57CBD328378A0F00ED4CAF /* Pods_WebSocketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; };
-		1A57CBD428378A0F00ED4CAF /* Pods_WebSocketTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AD38D9C283B69F400CC9E0E /* ChildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD38D9B283B69F400CC9E0E /* ChildViews.swift */; };
+		1AD38D9D283B920100CC9E0E /* Pods_WebSocketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; };
+		1AD38D9E283B920100CC9E0E /* Pods_WebSocketTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36E5FD55283B7F78009822F7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5FD54283B7F78009822F7 /* MessageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1A57CBD528378A0F00ED4CAF /* Embed Frameworks */ = {
+		1AD38D9F283B920100CC9E0E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1A57CBD428378A0F00ED4CAF /* Pods_WebSocketTest.framework in Embed Frameworks */,
+				1AD38D9E283B920100CC9E0E /* Pods_WebSocketTest.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A57CBD328378A0F00ED4CAF /* Pods_WebSocketTest.framework in Frameworks */,
+				1AD38D9D283B920100CC9E0E /* Pods_WebSocketTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,10 +84,10 @@
 				1A57CBD62837931400ED4CAF /* Info.plist */,
 				1A57CBC0283742C500ED4CAF /* WebSocketTestApp.swift */,
 				1A57CBC2283742C500ED4CAF /* ContentView.swift */,
+				1AD38D9B283B69F400CC9E0E /* ChildViews.swift */,
 				1A57CBD128377FE800ED4CAF /* URLSessionWebSocket.swift */,
 				1A57CBC4283742C600ED4CAF /* Assets.xcassets */,
 				1A57CBC6283742C600ED4CAF /* Preview Content */,
-				1AD38D9B283B69F400CC9E0E /* ChildViews.swift */,
 			);
 			path = WebSocketTest;
 			sourceTree = "<group>";
@@ -137,7 +137,7 @@
 				1A57CBBA283742C500ED4CAF /* Frameworks */,
 				1A57CBBB283742C500ED4CAF /* Resources */,
 				9F785F0D4C7464C95FA5614F /* [CP] Embed Pods Frameworks */,
-				1A57CBD528378A0F00ED4CAF /* Embed Frameworks */,
+				1AD38D9F283B920100CC9E0E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,7 +301,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -355,9 +355,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -374,7 +375,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebSocketTest/Preview Content\"";
-				DEVELOPMENT_TEAM = NZT54R9366;
+				DEVELOPMENT_TEAM = 78K3R74X59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebSocketTest/Info.plist;
@@ -383,7 +384,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -406,7 +407,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebSocketTest/Preview Content\"";
-				DEVELOPMENT_TEAM = NZT54R9366;
+				DEVELOPMENT_TEAM = 78K3R74X59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebSocketTest/Info.plist;
@@ -415,7 +416,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,14 +8,14 @@
 import Foundation
 import SwiftUI
 
-enum messageType{
+enum messageType {
     case history
     case message
     case color
 }
 
 extension String{
-    func converToColor() -> Color{
+    func converToColor() -> Color {
         switch self{
         case "red" :
             return .red
@@ -23,12 +23,8 @@ extension String{
             return .blue
         case "green" :
             return .green
-        case "magenta" :
-            return .init(uiColor: UIColor(red: 1, green: 0, blue: 1, alpha: 1))
         case "purple" :
             return .purple
-        case "plum" :
-            return .init(uiColor: UIColor(red: 142/255, green: 69/255, blue: 113/255, alpha: 1))
         case "orange":
             return .orange
         default :
@@ -36,7 +32,8 @@ extension String{
         }
     }
 }
-class MessageDataModel{
+
+class MessageDataModel {
     
     //姓名
     var author: String = ""
@@ -64,9 +61,10 @@ class MessageDataModel{
     
 }
 
-class MessageModel{
-    
-    //回傳訊息類別
+
+
+//回傳訊息類別
+class MessageModel {
     var type: messageType = .history
     
     //訊息陣列(歷史訊息跟新的訊息都用這個)
