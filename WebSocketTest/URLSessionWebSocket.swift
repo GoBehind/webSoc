@@ -22,7 +22,9 @@ class URLSessionWebSocket: NSObject {
     }
 
     func connect() {
-        guard let url = URL(string: "ws://192.168.20.75:1337/") else {
+        //遠端的IP    ws://web-socket-ehun.herokuapp.com/
+        //冠之的local IP    ws://192.168.20.75:1337/
+        guard let url = URL(string: "ws://web-socket-ehun.herokuapp.com/") else {
             print("Error: can not create URL")
             return
         }
