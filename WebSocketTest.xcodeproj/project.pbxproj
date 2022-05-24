@@ -13,25 +13,9 @@
 		1A57CBC8283742C600ED4CAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A57CBC7283742C600ED4CAF /* Preview Assets.xcassets */; };
 		1A57CBD228377FE800ED4CAF /* URLSessionWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A57CBD128377FE800ED4CAF /* URLSessionWebSocket.swift */; };
 		1AD38D9C283B69F400CC9E0E /* ChildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD38D9B283B69F400CC9E0E /* ChildViews.swift */; };
-		1AD38D9D283B920100CC9E0E /* Pods_WebSocketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; };
-		1AD38D9E283B920100CC9E0E /* Pods_WebSocketTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3601A577283C7E7100D1F56C /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3601A576283C7E7100D1F56C /* SetNameView.swift */; };
 		36E5FD55283B7F78009822F7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5FD54283B7F78009822F7 /* MessageModel.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1AD38D9F283B920100CC9E0E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1AD38D9E283B920100CC9E0E /* Pods_WebSocketTest.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		10FEA12E6CB0C21C782E3ADA /* Pods_WebSocketTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebSocketTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +38,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AD38D9D283B920100CC9E0E /* Pods_WebSocketTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +122,6 @@
 				1A57CBB9283742C500ED4CAF /* Sources */,
 				1A57CBBA283742C500ED4CAF /* Frameworks */,
 				1A57CBBB283742C500ED4CAF /* Resources */,
-				1AD38D9F283B920100CC9E0E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
