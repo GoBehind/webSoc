@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Starscream
+//import Starscream
 import SwiftUI
 
 class URLSessionWebSocket: NSObject {

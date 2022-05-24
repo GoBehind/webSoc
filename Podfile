@@ -7,6 +7,5 @@ target 'WebSocketTest' do
 
   # Pods for WebSocketTest
 
-pod 'Starscream', '~> 4.0.0'
 
 end
