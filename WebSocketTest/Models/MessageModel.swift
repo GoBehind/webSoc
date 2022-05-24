@@ -45,13 +45,13 @@ class MessageDataModel {
     var color: Color = .black
     
     //時間
-    var time: Int = 0
+    var time: String = ""
     
     init(
         author: String = "",
         text: String = "",
         color: Color = .black,
-        time: Int = 0
+        time: String = ""
     ){
         self.author = author
         self.text = text

@@ -87,7 +87,7 @@ class URLSessionWebSocket: NSObject {
                         let name = i["author"] as? String ?? ""
                         let message = i["text"] as? String ?? ""
                         let color = i["color"] as? String ?? ""
-                        let time = i["time"] as? Int ?? 0
+                        let time = i["time"] as? String ?? ""
                         datasModel.append(.init(author: name, text: message, color: color.converToColor(), time: time))
                     }
                     
@@ -98,7 +98,7 @@ class URLSessionWebSocket: NSObject {
                     let name = messageData["author"] as? String ?? ""
                     let message = messageData["text"] as? String ?? ""
                     let color = messageData["color"] as? String ?? ""
-                    let time = messageData["time"] as? Int ?? 0
+                    let time = messageData["time"] as? String ?? ""
                     return MessageModel(type: messageType, data: [.init(author: name, text: message, color: color.converToColor(), time: time)])
                 case "color":
                     messageType = .color
@@ -114,6 +114,7 @@ class URLSessionWebSocket: NSObject {
         return ""
         
     }
+    
 }
 
 extension URLSessionWebSocket: URLSessionWebSocketDelegate {
