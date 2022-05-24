@@ -28,7 +28,7 @@ extension String{
         case "orange":
             return .orange
         default :
-            return .black
+            return .pink
         }
     }
 }
