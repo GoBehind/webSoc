@@ -11,7 +11,7 @@ import SwiftUI
 struct WebSocketTestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SetNameView()
         }
     }
 }

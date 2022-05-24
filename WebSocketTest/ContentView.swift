@@ -11,7 +11,7 @@ struct ContentView: View {
     
     let urlSession = URLSessionWebSocket()
     @State var message = ""
-    @State var userName: String = ""
+    @Binding var userName: String
     @State var okToGo: Bool = false
     @State var datas = MessageModel(data: [])
     @State var contentView = [AnyView]()
@@ -134,7 +134,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(userName: .constant("user"))
     }
 }
 
