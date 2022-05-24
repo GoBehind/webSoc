@@ -17,107 +17,113 @@ struct ContentView: View {
     @State var contentView = [AnyView]()
     
     var body: some View {
-        NavigationView{
-            VStack (alignment: .leading){
-                ScrollView(.vertical, showsIndicators: true) {
+        VStack (alignment: .leading){
+            ScrollView(.vertical, showsIndicators: true) {
+                ScrollViewReader { value in
                     ForEach(self.contentView.indices, id: \.self) { i in
                         self.contentView[i]
                     }
-                }
-                .frame(width: UIScreen.main.bounds.width )
-                .padding(5)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack{
-                        Button {
-                            urlSession.send(message: "我看你完全是不懂喔")
-                        } label: {
-                            Text("我看你完全是不懂喔")
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(.white)
-                                .padding(5)
-                        }
-                        .background(Color.pink)
-                        .cornerRadius(6.0)
-                        
-                        Button {
-                            urlSession.send(message: "都幾歲了還這麼害羞")
-                        } label: {
-                            Text("都幾歲了還這麼害羞")
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(.white)
-                                .padding(5)
-                        }
-                        .background(Color.gray)
-                        .cornerRadius(6.0)
-                        
-                        Button {
-                            urlSession.send(message: "那個彬彬就是遜啦！")
-                        } label: {
-                            Text("那個彬彬就是遜啦！")
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(.white)
-                                .padding(5)
-                        }
-                        .background(Color.blue)
-                        .cornerRadius(6.0)
-                        
-                        Button {
-                            urlSession.send(message: "聽話！讓我看看")
-                        } label: {
-                            Text("聽話！讓我看看")
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(.white)
-                                .padding(5)
-                        }
-                        .background(Color.orange)
-                        .cornerRadius(6.0)
+                    .onChange(of: self.contentView.count){ _ in
+                        value.scrollTo(self.contentView.count - 1)
                     }
-                    .padding(2.5)
                 }
-                .padding(.horizontal, 5)
-                
-                HStack {
-                    TextField("使用者名稱", text: $userName)                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                        .disabled(self.okToGo)
+               
+            }
+            .frame(width: UIScreen.main.bounds.width )
+            .padding(5)
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack{
                     Button {
-                        if !self.okToGo {
-                            urlSession.receviedContent = { msg in
-                                if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
-                                    self.datas = models
-                                    self.setupViews()
-                                }
-                            }
-                            urlSession.connect()
-                            urlSession.send(message: self.userName)
-                            self.okToGo = true
-                        } else {
-                            urlSession.disconnect()
-                            self.okToGo = false
-                        }
-                        
+                        urlSession.send(message: "我看你完全是不懂喔")
+                        UIApplication.shared.endEditing()
                     } label: {
-                        Text(self.okToGo ? "離線" : "連結")
+                        Text("我看你完全是不懂喔")
                             .font(.system(.body, design: .rounded))
                             .foregroundColor(.white)
                             .padding(5)
                     }
-                    .background(Color.yellow)
+                    .background(Color.pink)
+                    .cornerRadius(6.0)
+                    
+                    Button {
+                        urlSession.send(message: "都幾歲了還這麼害羞")
+                        UIApplication.shared.endEditing()
+                    } label: {
+                        Text("都幾歲了還這麼害羞")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(5)
+                    }
+                    .background(Color.gray)
+                    .cornerRadius(6.0)
+                    
+                    Button {
+                        urlSession.send(message: "那個彬彬就是遜啦！")
+                        UIApplication.shared.endEditing()
+                    } label: {
+                        Text("那個彬彬就是遜啦！")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(5)
+                    }
+                    .background(Color.blue)
+                    .cornerRadius(6.0)
+                    
+                    Button {
+                        urlSession.send(message: "聽話！讓我看看")
+                        UIApplication.shared.endEditing()
+                    } label: {
+                        Text("聽話！讓我看看")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(5)
+                    }
+                    .background(Color.orange)
                     .cornerRadius(6.0)
                 }
-                .padding([.bottom, .horizontal])
-                .frame(width: UIScreen.main.bounds.width)
-                
+                .padding(2.5)
             }
-            .navigationTitle("WebSocketTest")
-            .navigationBarTitleDisplayMode(.large)
+            .padding(.horizontal, 5)
+            
+            HStack {
+                TextField("請輸入訊息內容", text: $message)                   .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button {
+                    urlSession.send(message: self.message)
+                    self.message = ""
+                    UIApplication.shared.endEditing()
+                } label: {
+                    Text("傳送")
+                        .font(.system(.body, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding(5)
+                }
+                .background(Color.yellow)
+                .cornerRadius(6.0)
+            }
+            .padding([.bottom, .horizontal])
+            .frame(width: UIScreen.main.bounds.width)
+            
         }
+        .onAppear{
+            urlSession.receviedContent = { msg in
+                if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
+                    self.datas = models
+                    self.setupViews()
+                }
+            }
+            urlSession.connect()
+            urlSession.send(message: self.userName)
+        }
+        .onDisappear{
+            urlSession.disconnect()
+        }
+        
     }
     
-    func outputText(user: String, content: String) -> String {
-        return "\("text"):\(content),\("author"):\(user)"
-    }
     
     func setupViews() {
         for item in self.datas.data {
@@ -149,4 +155,10 @@ public enum WebSocketEvent {
     case viablityChanged(Bool)        //!< 可行性改變
     case reconnectSuggested(Bool)     //!< 重新連接
     case cancelled                    //!< 已取消
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

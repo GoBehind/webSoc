@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 struct TextView: UIViewRepresentable {
-
+    
     @Binding var text: String
     let textView = UITextView()
-
+    
     func makeUIView(context: Context) -> UITextView {
         
         textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
@@ -22,10 +22,10 @@ struct TextView: UIViewRepresentable {
         textView.isSelectable = true
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
-
+        
         return textView
     }
-
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
         uiView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
@@ -66,14 +66,21 @@ struct MsgView: View {
             
             if isSelf  {
                 Spacer()
-            } else {
-                Text(self.name)
-                    .foregroundColor(self.textColor)
-                    .font(.headline)
-                    .frame(width: 50, alignment: .leading)
             }
+//            else {
+//                Text(self.name)
+//                    .foregroundColor(self.textColor)
+//                    .font(.headline)
+//                    .frame(width: 50, alignment: .leading)
+//            }
             
             VStack(alignment: self.isSelf ? .trailing : .leading){
+                if !self.isSelf {
+                    Text("\(self.name):")
+                        .foregroundColor(self.textColor)
+                        .font(.headline)
+                        .frame(alignment: .leading)
+                }
                 Text(self.content)
                     .foregroundColor(self.textColor)
                     .font(.body)

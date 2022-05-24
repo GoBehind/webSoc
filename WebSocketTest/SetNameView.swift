@@ -27,9 +27,10 @@ struct SetNameView: View {
                     Text("確定")
                 }
             }
+            .navigationTitle("WebSocketTest")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .navigationTitle("首頁")
-        .navigationBarTitleDisplayMode(.large)
+        
     }
 }
 
