@@ -59,14 +59,21 @@ struct MsgView: View {
     var content: String
     var dateString: String
     var textColor: Color
+    var isSelf: Bool = false
     
     var body: some View {
         HStack (alignment: .top){
-            Text(self.name)
-                .foregroundColor(self.textColor)
-                .font(.headline)
             
-            VStack(alignment: .leading){
+            if isSelf  {
+                Spacer()
+            } else {
+                Text(self.name)
+                    .foregroundColor(self.textColor)
+                    .font(.headline)
+                    .frame(width: 50, alignment: .leading)
+            }
+            
+            VStack(alignment: self.isSelf ? .trailing : .leading){
                 Text(self.content)
                     .foregroundColor(self.textColor)
                     .font(.body)
@@ -74,7 +81,14 @@ struct MsgView: View {
                     .foregroundColor(.gray)
                     .font(.footnote)
             }
+            
+            if !self.isSelf {
+                Spacer()
+            }
+            
         }
+        .padding(.horizontal)
+        .padding(.vertical, 2)
     }
 }
 

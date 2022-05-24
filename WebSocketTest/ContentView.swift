@@ -18,14 +18,14 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-            VStack {
+            VStack (alignment: .leading){
                 ScrollView(.vertical, showsIndicators: true) {
                     ForEach(self.contentView.indices, id: \.self) { i in
                         self.contentView[i]
                     }
-                }.onAppear(perform: self.setupViews)
-//                TextView(text: $message)
-//                    .padding(.horizontal)
+                }
+                .frame(width: UIScreen.main.bounds.width )
+                .padding(5)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack{
@@ -86,14 +86,8 @@ struct ContentView: View {
                             urlSession.receviedContent = { msg in
                                 if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
                                     self.datas = models
-                                    self.datas.data.forEach { data in
-                                        self.contentView.append(AnyView(MsgView(name: data.author,
-                                                                                content: data.text,
-                                                                                dateString: String(data.time),
-                                                                                textColor: data.color)))
-                                    }
+                                    self.setupViews()
                                 }
-//                                self.message += msg
                             }
                             urlSession.connect()
                             urlSession.send(message: self.userName)
@@ -114,7 +108,7 @@ struct ContentView: View {
                 }
                 .padding([.bottom, .horizontal])
                 .frame(width: UIScreen.main.bounds.width)
-            
+                
             }
             .navigationTitle("WebSocketTest")
             .navigationBarTitleDisplayMode(.large)
@@ -131,7 +125,8 @@ struct ContentView: View {
             self.contentView.append(AnyView(MsgView(name: item.author,
                                                     content: item.text,
                                                     dateString: String(item.time),
-                                                    textColor: item.color)))
+                                                    textColor: item.color,
+                                                    isSelf: item.author == self.userName)))
         }
     }
 }
