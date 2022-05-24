@@ -86,6 +86,12 @@ struct ContentView: View {
                             urlSession.receviedContent = { msg in
                                 if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
                                     self.datas = models
+                                    self.datas.data.forEach { data in
+                                        self.contentView.append(AnyView(MsgView(name: data.author,
+                                                                                content: data.text,
+                                                                                dateString: String(data.time),
+                                                                                textColor: data.color)))
+                                    }
                                 }
 //                                self.message += msg
                             }
