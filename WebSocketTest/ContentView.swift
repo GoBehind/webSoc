@@ -84,7 +84,9 @@ struct ContentView: View {
                     Button {
                         if !self.okToGo {
                             urlSession.receviedContent = { msg in
-                                self.datas = urlSession.deCodeToModel(str: msg) as! MessageModel
+                                if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
+                                    self.datas = models
+                                }
 //                                self.message += msg
                             }
                             urlSession.connect()
@@ -119,6 +121,7 @@ struct ContentView: View {
     
     func setupViews() {
         for item in self.datas.data {
+            guard !item.text.isEmpty else { return }
             self.contentView.append(AnyView(MsgView(name: item.author,
                                                     content: item.text,
                                                     dateString: String(item.time),
