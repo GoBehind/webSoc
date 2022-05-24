@@ -12,9 +12,11 @@ struct ContentView: View {
     let urlSession = URLSessionWebSocket()
     @State var message = ""
     @Binding var userName: String
-    @State var okToGo: Bool = false
     @State var datas = MessageModel(data: [])
     @State var contentView = [AnyView]()
+    @State var showAlert: Bool = false
+    @State var alertMessage: String = ""
+    @Binding var isPush: Bool
     
     var body: some View {
         VStack (alignment: .leading){
@@ -108,6 +110,15 @@ struct ContentView: View {
             .frame(width: UIScreen.main.bounds.width)
             
         }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("出錯啦"),
+                message: Text(self.alertMessage),
+                dismissButton: .default(Text("掰餔"), action: {
+                    self.isPush = false
+                })
+            )
+        }
         .onAppear{
             urlSession.receviedContent = { msg in
                 if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
@@ -115,10 +126,15 @@ struct ContentView: View {
                     self.setupViews()
                 }
             }
+            urlSession.getError = { error in
+                self.showAlert = true
+                self.alertMessage = error.localizedDescription
+            }
             urlSession.connect()
             urlSession.send(message: self.userName)
         }
         .onDisappear{
+            self.isPush = false
             urlSession.disconnect()
         }
         
@@ -140,7 +156,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(userName: .constant("user"))
+        ContentView(userName: .constant("user"), isPush: .constant(true))
     }
 }
 

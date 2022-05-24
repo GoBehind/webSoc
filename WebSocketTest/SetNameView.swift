@@ -10,6 +10,7 @@ import SwiftUI
 struct SetNameView: View {
     
     @State var name: String  = ""
+    @State var isPush: Bool = false
     
     let urlSession = URLSessionWebSocket()
     
@@ -21,10 +22,14 @@ struct SetNameView: View {
                     .frame(width: 200, height:40, alignment: .center)
                     .border(.gray, width: 1)
                 
-                NavigationLink {
-                    ContentView(userName: $name)
+                Button {
+                    self.isPush = true
                 } label: {
-                    Text("確定")
+                    NavigationLink(destination: ContentView(userName: $name,
+                                                            isPush: $isPush),
+                                   isActive: $isPush) {
+                        Text("確定")
+                    }
                 }
             }
             .navigationTitle("WebSocketTest")

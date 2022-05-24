@@ -13,10 +13,12 @@ class URLSessionWebSocket: NSObject {
     
     var webSocketTask: URLSessionWebSocketTask?
     var receviedContent: ((String) -> ())? = nil
+    var getError: ((Error) -> ())? = nil
     
-    init(receviedContent:((String) -> ())? = nil) {
+    init(receviedContent:((String) -> ())? = nil, getError: ((Error) -> ())? = nil) {
         super.init()
         self.receviedContent = receviedContent
+        self.getError = getError
     }
 
     func connect() {
@@ -48,6 +50,7 @@ class URLSessionWebSocket: NSObject {
 
             case .failure(let error):
                 print(error)
+                self.getError?(error)
             }
 
             self.receive()
