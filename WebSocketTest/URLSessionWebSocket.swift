@@ -84,7 +84,7 @@ class URLSessionWebSocket: NSObject {
                     
                     for i in datas {
                         let name = i["author"] as? String ?? ""
-                        let message = i["author"] as? String ?? ""
+                        let message = i["text"] as? String ?? ""
                         let color = i["color"] as? String ?? ""
                         let time = i["time"] as? Int ?? 0
                         datasModel.append(.init(author: name, text: message, color: color.converToColor(), time: time))
@@ -95,10 +95,14 @@ class URLSessionWebSocket: NSObject {
                     messageType = .message
                     let messageData = json["data"] as? Dictionary<String,Any> ?? [:]
                     let name = messageData["author"] as? String ?? ""
-                    let message = messageData["author"] as? String ?? ""
+                    let message = messageData["text"] as? String ?? ""
                     let color = messageData["color"] as? String ?? ""
                     let time = messageData["time"] as? Int ?? 0
                     return MessageModel(type: messageType, data: [.init(author: name, text: message, color: color.converToColor(), time: time)])
+                case "color":
+                    messageType = .color
+                    let colorString = json["data"] as? String ?? ""
+                    return OnlyColorModel(type: .color, color: colorString.converToColor())
                 default:
                     return ""
                 }
