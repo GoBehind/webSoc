@@ -14,11 +14,13 @@ class URLSessionWebSocket: NSObject {
     var webSocketTask: URLSessionWebSocketTask?
     var receviedContent: ((String) -> ())? = nil
     var getError: ((Error) -> ())? = nil
+    var roomID: String?
     
-    init(receviedContent:((String) -> ())? = nil, getError: ((Error) -> ())? = nil) {
+    init(receviedContent:((String) -> ())? = nil, getError: ((Error) -> ())? = nil, roomID: String?) {
         super.init()
         self.receviedContent = receviedContent
         self.getError = getError
+        self.roomID = roomID
     }
 
     func connect() {
@@ -60,7 +62,15 @@ class URLSessionWebSocket: NSObject {
     }
 
     func send(message: String) {
-        let message = URLSessionWebSocketTask.Message.string(message)
+        let message = URLSessionWebSocketTask.Message.string(message + "+" + (self.roomID ?? ""))
+        webSocketTask?.send(message) { error in
+            if let error = error {
+                print(error)
+            }
+        }
+    }
+    func firstSend(name: String, ID: String) {
+        let message = URLSessionWebSocketTask.Message.string(name + "+" + ID)
         webSocketTask?.send(message) { error in
             if let error = error {
                 print(error)
@@ -151,4 +161,18 @@ extension URLSessionWebSocket: URLSessionDelegate {
 
        completionHandler(.useCredential, urlCredential)
     }
+}
+extension Dictionary {
+    
+    func toJsonString() -> String? {
+        guard let data = try? JSONSerialization.data(withJSONObject: self,
+                                                     options: []) else {
+            return nil
+        }
+        guard let str = String(data: data, encoding: .utf8) else {
+            return nil
+        }
+        return str
+     }
+    
 }

@@ -8,11 +8,9 @@
 import Foundation
 import SwiftUI
 struct SetNameView: View {
-    
     @State var name: String  = ""
     @State var isPush: Bool = false
-    
-    let urlSession = URLSessionWebSocket()
+    @State var roomID: String = ""
     
     var body: some View {
         NavigationView{
@@ -21,12 +19,16 @@ struct SetNameView: View {
                     .padding()
                     .frame(width: 200, height:40, alignment: .center)
                     .border(.gray, width: 1)
-                
+                TextField("輸入聊天室關鍵字", text: $roomID)
+                    .padding()
+                    .frame(width: 200, height:40, alignment: .center)
+                    .border(.gray, width: 1)
                 Button {
                     self.isPush = true
                 } label: {
                     NavigationLink(destination: ContentView(userName: $name,
-                                                            isPush: $isPush),
+                                                            isPush: $isPush,
+                                                            roomID: $roomID),
                                    isActive: $isPush) {
                         Text("確定")
                     }

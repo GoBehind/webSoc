@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let urlSession = URLSessionWebSocket()
+    @State var urlSession: URLSessionWebSocket?
     @State var message = ""
     @Binding var userName: String
     @State var datas = MessageModel(data: [])
@@ -17,7 +17,7 @@ struct ContentView: View {
     @State var showAlert: Bool = false
     @State var alertMessage: String = ""
     @Binding var isPush: Bool
-    
+    @Binding var roomID: String
     var body: some View {
         VStack (alignment: .leading){
             ScrollView(.vertical, showsIndicators: true) {
@@ -40,7 +40,7 @@ struct ContentView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
                     Button {
-                        urlSession.send(message: "我看你完全是不懂喔")
+                        urlSession?.send(message: "我看你完全是不懂喔")
                         UIApplication.shared.endEditing()
                     } label: {
                         Text("我看你完全是不懂喔")
@@ -52,7 +52,7 @@ struct ContentView: View {
                     .cornerRadius(6.0)
                     
                     Button {
-                        urlSession.send(message: "都幾歲了還這麼害羞")
+                        urlSession?.send(message: "都幾歲了還這麼害羞")
                         UIApplication.shared.endEditing()
                     } label: {
                         Text("都幾歲了還這麼害羞")
@@ -64,7 +64,7 @@ struct ContentView: View {
                     .cornerRadius(6.0)
                     
                     Button {
-                        urlSession.send(message: "那個彬彬就是遜啦！")
+                        urlSession?.send(message: "那個彬彬就是遜啦！")
                         UIApplication.shared.endEditing()
                     } label: {
                         Text("那個彬彬就是遜啦！")
@@ -76,7 +76,7 @@ struct ContentView: View {
                     .cornerRadius(6.0)
                     
                     Button {
-                        urlSession.send(message: "聽話！讓我看看")
+                        urlSession?.send(message: "聽話！讓我看看")
                         UIApplication.shared.endEditing()
                     } label: {
                         Text("聽話！讓我看看")
@@ -94,7 +94,7 @@ struct ContentView: View {
             HStack {
                 TextField("請輸入訊息內容", text: $message)                   .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button {
-                    urlSession.send(message: self.message)
+                    urlSession?.send(message: self.message)
                     self.message = ""
                     UIApplication.shared.endEditing()
                 } label: {
@@ -120,22 +120,24 @@ struct ContentView: View {
             )
         }
         .onAppear{
-            urlSession.receviedContent = { msg in
-                if let models = urlSession.deCodeToModel(str: msg) as? MessageModel{
+            urlSession = .init(roomID: roomID)
+            urlSession?.receviedContent = { msg in
+                if let models = urlSession?.deCodeToModel(str: msg) as? MessageModel{
                     self.datas = models
                     self.setupViews()
                 }
             }
-            urlSession.getError = { error in
+            urlSession?.getError = { error in
                 self.showAlert = true
                 self.alertMessage = error.localizedDescription
             }
-            urlSession.connect()
-            urlSession.send(message: self.userName)
+            urlSession?.connect()
+//            urlSession?.send(message: self.userName)
+            urlSession?.firstSend(name: self.userName, ID: self.roomID)
         }
         .onDisappear{
             self.isPush = false
-            urlSession.disconnect()
+            urlSession?.disconnect()
         }
         
     }
@@ -156,7 +158,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(userName: .constant("user"), isPush: .constant(true))
+        ContentView(userName: .constant("user"), isPush: .constant(true), roomID: .constant("000000"))
     }
 }
 
